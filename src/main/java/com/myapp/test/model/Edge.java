@@ -1,14 +1,19 @@
 package com.myapp.test.model;
 
-import java.util.Arrays;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Edge {
     private char startPoint;
     private List<Character> endPoint;
-    private List<Double> len;
-    private List<Double> speed;
-    private List<Double> weight;
+    private List<Double> l;
+    private List<Double> s;
+    private Map<Character,Double> weight;
 
     public char getStartPoint() {
         return startPoint;
@@ -18,24 +23,24 @@ public class Edge {
         return endPoint;
     }
 
-    public List<Double> getLen() {
-        return len;
+    public List<Double> getL() {
+        return l;
     }
 
-    public List<Double> getSpeed() {
-        return speed;
+    public List<Double> getS() {
+        return s;
     }
 
     public void setEndPoint(List<Character> endPoint) {
         this.endPoint = endPoint;
     }
 
-    public void setLen(List<Double> len) {
-        this.len = len;
+    public void setL(List<Double> l) {
+        this.l = l;
     }
 
-    public void setSpeed(List<Double> speed) {
-        this.speed = speed;
+    public void setS(List<Double> s) {
+        this.s = s;
     }
 
     public void setStartPoint(char startPoint) {
@@ -43,14 +48,14 @@ public class Edge {
     }
 
     public void setWeight() {
-        List<Double> weight= Arrays.asList();
-        for (int i=0;i<len.size();i++){
-            weight.add(len.get(i)*speed.get(i));
+        Map<Character,Double> weight =new HashMap<>();;
+        for (int i=0;i<l.size();i++){
+            weight.put(endPoint.get(i),l.get(i)*1.0/s.get(i));
         }
         this.weight=weight;
     }
 
-    public List<Double> getWeight() {
+    public Map<Character,Double> getWeight() {
         return weight;
     }
 
@@ -59,3 +64,4 @@ public class Edge {
         return startPoint+"->" +endPoint;
     }
 }
+

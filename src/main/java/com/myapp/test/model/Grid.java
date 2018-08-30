@@ -1,10 +1,14 @@
 package com.myapp.test.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Grid {
 
    private int id;
+
    private List<Edge> edges;
 
    public void setEdges(List<Edge> edges) {
